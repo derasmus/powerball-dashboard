@@ -614,12 +614,100 @@
         }
         
         @media (max-width: 768px) {
-            h1 { font-size: 1.8rem; }
-            .grid { grid-template-columns: 1fr; }
-            .stats-grid { grid-template-columns: repeat(2, 1fr); }
-            .last-draw-ball { width: 40px; height: 40px; font-size: 1rem; }
-            .last-draw-info-row { gap: 15px; }
-            .analysis-grid { grid-template-columns: repeat(2, 1fr); }
+            body { padding: 10px; }
+            h1 { font-size: 1.5rem; }
+            .subtitle { font-size: 0.9rem; }
+            header { padding: 15px; }
+            
+            .grid { grid-template-columns: 1fr; gap: 15px; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            .card { padding: 15px; }
+            
+            /* Countdown mobile fixes */
+            .countdown-container { padding: 15px; margin-top: 20px; }
+            .countdown { gap: 8px; }
+            .countdown-item { 
+                padding: 8px 12px; 
+                min-width: 55px; 
+            }
+            .countdown-value { font-size: 1.5rem; }
+            .countdown-unit { font-size: 0.7rem; }
+            .countdown-label { font-size: 0.9rem; }
+            
+            /* Last draw mobile */
+            .last-draw-display { padding: 15px; margin: 20px auto; }
+            .last-draw-ball { 
+                width: 36px; 
+                height: 36px; 
+                font-size: 0.9rem; 
+            }
+            .last-draw-numbers { gap: 6px; flex-wrap: wrap; justify-content: center; }
+            .last-draw-info-row { 
+                flex-direction: column; 
+                gap: 10px;
+                align-items: center;
+            }
+            .last-draw-stat-value { font-size: 1rem; }
+            
+            /* Analysis mobile */
+            .analysis-grid { 
+                grid-template-columns: repeat(2, 1fr); 
+                gap: 8px;
+            }
+            .analysis-item { padding: 8px; }
+            .mini-ball {
+                width: 24px;
+                height: 24px;
+                font-size: 0.75rem;
+            }
+            
+            /* Tickets mobile */
+            .ticket-match-row {
+                flex-direction: column;
+                gap: 8px;
+                align-items: flex-start;
+            }
+            .ticket-numbers {
+                flex-wrap: wrap;
+                justify-content: flex-start;
+            }
+            
+            /* Number balls mobile */
+            .number-ball, .draw-ball, .combo-ball {
+                width: 36px;
+                height: 36px;
+                font-size: 0.9rem;
+            }
+            .combo-ball {
+                width: 38px;
+                height: 38px;
+                font-size: 0.95rem;
+            }
+            
+            /* Recommendations mobile */
+            .recommendations {
+                grid-template-columns: 1fr;
+            }
+            .combo-numbers {
+                gap: 6px;
+            }
+            
+            /* Grid min-width fix */
+            .grid { grid-template-columns: minmax(0, 1fr); }
+        }
+        
+        @media (max-width: 480px) {
+            h1 { font-size: 1.3rem; }
+            .countdown-value { font-size: 1.3rem; }
+            .countdown-item { min-width: 48px; padding: 6px 8px; }
+            .last-draw-ball { width: 32px; height: 32px; font-size: 0.8rem; }
+            .mini-ball { width: 22px; height: 22px; font-size: 0.7rem; }
+            .number-ball, .draw-ball, .combo-ball {
+                width: 32px;
+                height: 32px;
+                font-size: 0.8rem;
+            }
+            .stats-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -1137,9 +1225,17 @@
             document.getElementById('next-draw-info').textContent = `Next draw: ${formatDrawDay(nextDraw)}`;
         }
         
-        // Start countdown immediately and update every second
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
+        // Start countdown after DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        });
+        
+        // Also try immediate execution as fallback
+        if (document.readyState === 'complete' || document.readyState === 'interactive') {
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        }
     </script>
 </body>
 </html>
