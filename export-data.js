@@ -110,8 +110,8 @@ function exportData() {
       return { n1: parseInt(n1), n2: parseInt(n2), count };
     });
   
-  // Get last 20 draws with metadata
-  const last20 = sorted.slice(-20).reverse().map(draw => ({
+  // Get last 6 draws with metadata and winner info
+  const last6 = sorted.slice(-6).reverse().map(draw => ({
     date: draw.date,
     numbers: draw.numbers.sort((a, b) => a - b),
     powerball: draw.powerball,
@@ -119,7 +119,9 @@ function exportData() {
     rollover: draw.rollover,
     totalPrizePool: draw.totalPrizePool,
     totalSales: draw.totalSales,
-    drawNumber: draw.drawNumber
+    drawNumber: draw.drawNumber,
+    hasWinner: draw.rollover === 0 || (draw.rollover !== undefined && draw.rollover === 0),
+    isRollover: draw.rollover > 0
   }));
   
   // Calculate historical performance for user's tickets
@@ -184,7 +186,7 @@ function exportData() {
       totalDraws: data.totalDraws,
       dateRange: data.dateRange,
       lastUpdated: new Date().toISOString(),
-      lastDraw: last20[0]
+      lastDraw: last6[0]
     },
     hotNumbers: rankedNumbers.slice(0, 15).map((item, index) => ({
       ...item,
@@ -207,7 +209,7 @@ function exportData() {
       percentage: ((item.count / data.totalDraws) * 100).toFixed(1)
     })),
     topPairs: sortedPairs,
-    last20Draws: last20,
+    last6Draws: last6,
     activeTickets: activeTickets,
     statistics: {
       expectedFreq: (data.totalDraws * 5 / 50).toFixed(1),

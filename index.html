@@ -385,10 +385,110 @@
         .badge.cold { background: rgba(78, 205, 196, 0.2); color: var(--cold); }
         .badge.just-hit { background: rgba(255, 217, 61, 0.2); color: var(--gold); }
         
+        /* Last Draw Display Styles */
+        .last-draw-display {
+            background: linear-gradient(135deg, var(--accent-secondary), var(--bg-dark));
+            padding: 25px;
+            border-radius: 16px;
+            margin: 30px auto;
+            max-width: 800px;
+            border: 2px solid var(--gold);
+        }
+        
+        .last-draw-label {
+            font-size: 0.9rem;
+            color: var(--gold);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .last-draw-date {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
+        
+        .last-draw-numbers {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+        
+        .last-draw-ball {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.3rem;
+            color: white;
+            background: linear-gradient(135deg, var(--hot), #ff8e8e);
+            box-shadow: 0 4px 15px rgba(233, 69, 96, 0.3);
+        }
+        
+        .last-draw-ball.pb {
+            background: linear-gradient(135deg, #ffd93d, #ff9f43);
+            color: #333;
+        }
+        
+        .last-draw-info-row {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .last-draw-stat {
+            text-align: center;
+        }
+        
+        .last-draw-stat-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 3px;
+        }
+        
+        .last-draw-stat-value {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--text);
+        }
+        
+        .winner-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        
+        .winner-badge.won {
+            background: rgba(78, 205, 196, 0.2);
+            color: #4ecdc4;
+            border: 1px solid rgba(78, 205, 196, 0.4);
+        }
+        
+        .winner-badge.rollover {
+            background: rgba(255, 107, 107, 0.2);
+            color: var(--hot);
+            border: 1px solid rgba(255, 107, 107, 0.4);
+        }
+        
         @media (max-width: 768px) {
             h1 { font-size: 1.8rem; }
             .grid { grid-template-columns: 1fr; }
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .last-draw-ball { width: 40px; height: 40px; font-size: 1rem; }
+            .last-draw-info-row { gap: 15px; }
         }
     </style>
 </head>
@@ -426,6 +526,28 @@
                     </div>
                     <div class="next-draw-info" id="next-draw-info">Next draw: Loading...</div>
                 </div>
+                
+                <!-- LAST DRAW DISPLAY -->
+                <div class="last-draw-display" id="last-draw-display" style="margin-top: 25px;">
+                    <div class="last-draw-label">🎱 LAST DRAW RESULTS</div>
+                    <div class="last-draw-date" id="last-draw-date">Loading...</div>
+                    <div class="last-draw-numbers" id="last-draw-numbers"></div>
+                    <div class="last-draw-info-row" id="last-draw-stats">
+                        <div class="last-draw-stat">
+                            <div class="last-draw-stat-label">Jackpot</div>
+                            <div class="last-draw-stat-value" id="last-draw-jackpot">-</div>
+                        </div>
+                        <div class="last-draw-stat">
+                            <div class="last-draw-stat-label">Rollover</div>
+                            <div class="last-draw-stat-value" id="last-draw-rollover">-</div>
+                        </div>
+                        <div class="last-draw-stat">
+                            <div class="last-draw-stat-label">Prize Pool</div>
+                            <div class="last-draw-stat-value" id="last-draw-pool">-</div>
+                        </div>
+                    </div>
+                    <div id="last-draw-status"></div>
+                </div>
             </header>
             
             <div class="stats-grid" id="stats-grid"></div>
@@ -448,7 +570,7 @@
             </div>
             
             <div class="card" style="margin-bottom: 30px;">
-                <h2>🔄 LAST 20 DRAWS</h2>
+                <h2>🔄 LAST 6 DRAWS</h2>
                 <div class="draw-list" id="last-draws"></div>
             </div>
             
@@ -594,8 +716,39 @@
             }).join('');
             document.getElementById('powerball-list').innerHTML = pbHTML;
             
-            // Last 20 draws
-            const drawsHTML = data.last20Draws.map(draw => {
+            // Last Draw Display (at top)
+            if (data.last6Draws && data.last6Draws.length > 0) {
+                const lastDraw = data.last6Draws[0];
+                
+                // Update last draw info
+                document.getElementById('last-draw-date').textContent = lastDraw.date;
+                
+                // Display numbers
+                const numbersHTML = lastDraw.numbers.map(n => 
+                    `<div class="last-draw-ball">${n}</div>`
+                ).join('') + `<div class="last-draw-ball pb">${lastDraw.powerball}</div>`;
+                document.getElementById('last-draw-numbers').innerHTML = numbersHTML;
+                
+                // Display stats
+                const jackpot = lastDraw.jackpot ? `R${lastDraw.jackpot.toLocaleString()}` : 'N/A';
+                const rollover = lastDraw.rollover !== undefined ? `#${lastDraw.rollover}` : 'N/A';
+                const pool = lastDraw.totalPrizePool ? `R${lastDraw.totalPrizePool.toLocaleString()}` : 'N/A';
+                
+                document.getElementById('last-draw-jackpot').textContent = jackpot;
+                document.getElementById('last-draw-rollover').textContent = rollover;
+                document.getElementById('last-draw-pool').textContent = pool;
+                
+                // Winner/Rollover badge
+                const statusDiv = document.getElementById('last-draw-status');
+                if (lastDraw.rollover === 0) {
+                    statusDiv.innerHTML = '<div class="winner-badge won">🎉 JACKPOT WON!</div>';
+                } else {
+                    statusDiv.innerHTML = `<div class="winner-badge rollover">🔄 ROLLOVER #${lastDraw.rollover}</div>`;
+                }
+            }
+            
+            // Last 6 draws (list)
+            const drawsHTML = data.last6Draws.slice(1).map(draw => {
                 return `
                     <div class="draw-item">
                         <div class="draw-date">${draw.date}</div>
