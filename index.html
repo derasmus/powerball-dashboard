@@ -483,12 +483,143 @@
             border: 1px solid rgba(255, 107, 107, 0.4);
         }
         
+        /* Last Draw Analysis Styles */
+        .last-draw-analysis {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .analysis-title {
+            font-size: 1rem;
+            color: var(--gold);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .analysis-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .analysis-item {
+            background: rgba(255,255,255,0.05);
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .analysis-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+        
+        .analysis-value {
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+        
+        .analysis-value.hot { color: var(--hot); }
+        .analysis-value.cold { color: var(--cold); }
+        .analysis-value.neutral { color: var(--text); }
+        
+        .mini-number-list {
+            display: flex;
+            gap: 6px;
+            justify-content: center;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .mini-ball {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.85rem;
+            color: white;
+        }
+        
+        .mini-ball.hot { background: var(--hot); }
+        .mini-ball.cold { background: var(--cold); }
+        .mini-ball.neutral { background: #666; }
+        
+        .my-tickets-analysis {
+            margin-top: 20px;
+            padding: 15px;
+            background: var(--bg-dark);
+            border-radius: 10px;
+            border: 1px solid rgba(255,215,0,0.2);
+        }
+        
+        .my-tickets-title {
+            font-size: 0.95rem;
+            color: var(--gold);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .ticket-match-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 12px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 6px;
+            margin-bottom: 8px;
+        }
+        
+        .ticket-match-row:last-child {
+            margin-bottom: 0;
+        }
+        
+        .ticket-name {
+            font-weight: bold;
+            color: var(--text);
+            min-width: 40px;
+        }
+        
+        .ticket-numbers {
+            display: flex;
+            gap: 4px;
+            flex: 1;
+            justify-content: center;
+        }
+        
+        .ticket-match-count {
+            font-weight: bold;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+        }
+        
+        .ticket-match-count.win { 
+            background: rgba(78, 205, 196, 0.2); 
+            color: #4ecdc4; 
+        }
+        
+        .ticket-match-count.none { 
+            background: rgba(255,255,255,0.1); 
+            color: var(--text-muted); 
+        }
+        
         @media (max-width: 768px) {
             h1 { font-size: 1.8rem; }
             .grid { grid-template-columns: 1fr; }
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
             .last-draw-ball { width: 40px; height: 40px; font-size: 1rem; }
             .last-draw-info-row { gap: 15px; }
+            .analysis-grid { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
 </head>
@@ -547,6 +678,39 @@
                         </div>
                     </div>
                     <div id="last-draw-status"></div>
+                    
+                    <!-- LAST DRAW ANALYSIS -->
+                    <div class="last-draw-analysis" id="last-draw-analysis" style="display: none;">
+                        <div class="analysis-title">📊 Draw Analysis</div>
+                        <div class="analysis-grid">
+                            <div class="analysis-item">
+                                <div class="analysis-label">🔥 Hot Numbers</div>
+                                <div class="analysis-value hot" id="analysis-hot-count">-</div>
+                                <div class="mini-number-list" id="analysis-hot-list"></div>
+                            </div>
+                            <div class="analysis-item">
+                                <div class="analysis-label">❄️ Cold Numbers</div>
+                                <div class="analysis-value cold" id="analysis-cold-count">-</div>
+                                <div class="mini-number-list" id="analysis-cold-list"></div>
+                            </div>
+                            <div class="analysis-item">
+                                <div class="analysis-label">⚪ Neutral</div>
+                                <div class="analysis-value neutral" id="analysis-neutral-count">-</div>
+                                <div class="mini-number-list" id="analysis-neutral-list"></div>
+                            </div>
+                            <div class="analysis-item">
+                                <div class="analysis-label">🎯 Powerball</div>
+                                <div class="analysis-value" id="analysis-pb-status">-</div>
+                            </div>
+                        </div>
+                        
+                        <div class="my-tickets-analysis" id="my-tickets-analysis" style="display: none;">
+                            <div class="my-tickets-title">
+                                🎫 Your Tickets vs This Draw
+                            </div>
+                            <div id="ticket-matches-list"></div>
+                        </div>
+                    </div>
                 </div>
             </header>
             
@@ -744,6 +908,72 @@
                     statusDiv.innerHTML = '<div class="winner-badge won">🎉 JACKPOT WON!</div>';
                 } else {
                     statusDiv.innerHTML = `<div class="winner-badge rollover">🔄 ROLLOVER #${lastDraw.rollover}</div>`;
+                }
+                
+                // Last Draw Analysis
+                if (data.lastDrawAnalysis) {
+                    const analysis = data.lastDrawAnalysis;
+                    document.getElementById('last-draw-analysis').style.display = 'block';
+                    
+                    // Hot numbers
+                    document.getElementById('analysis-hot-count').textContent = `${analysis.hotCount}/5`;
+                    document.getElementById('analysis-hot-list').innerHTML = analysis.hotNumbers.map(n => 
+                        `<div class="mini-ball hot">${n}</div>`
+                    ).join('') || '<span style="color: var(--text-muted); font-size: 0.8rem;">None</span>';
+                    
+                    // Cold numbers
+                    document.getElementById('analysis-cold-count').textContent = `${analysis.coldCount}/5`;
+                    document.getElementById('analysis-cold-list').innerHTML = analysis.coldNumbers.map(n => 
+                        `<div class="mini-ball cold">${n}</div>`
+                    ).join('') || '<span style="color: var(--text-muted); font-size: 0.8rem;">None</span>';
+                    
+                    // Neutral numbers
+                    document.getElementById('analysis-neutral-count').textContent = `${analysis.neutralCount}/5`;
+                    document.getElementById('analysis-neutral-list').innerHTML = analysis.neutralNumbers.map(n => 
+                        `<div class="mini-ball neutral">${n}</div>`
+                    ).join('') || '<span style="color: var(--text-muted); font-size: 0.8rem;">None</span>';
+                    
+                    // Powerball status
+                    const pbStatus = document.getElementById('analysis-pb-status');
+                    if (analysis.isHotPB) {
+                        pbStatus.innerHTML = '<span style="color: var(--hot);">🔥 HOT</span>';
+                    } else if (analysis.isColdPB) {
+                        pbStatus.innerHTML = '<span style="color: var(--cold);">❄️ COLD</span>';
+                    } else {
+                        pbStatus.innerHTML = '<span style="color: #888;">⚪ Average</span>';
+                    }
+                }
+                
+                // Your tickets analysis
+                if (data.lastDrawMatches && data.lastDrawMatches.length > 0) {
+                    document.getElementById('my-tickets-analysis').style.display = 'block';
+                    
+                    // Sort by total matches, show tickets with matches first
+                    const matches = data.lastDrawMatches.filter(t => t.totalMatches > 0);
+                    const noMatches = data.lastDrawMatches.filter(t => t.totalMatches === 0);
+                    const sortedMatches = [...matches, ...noMatches].slice(0, 5); // Show top 5
+                    
+                    const ticketsHTML = sortedMatches.map(ticket => {
+                        const matchText = ticket.totalMatches > 0 ? `${ticket.totalMatches} match${ticket.totalMatches > 1 ? 'es' : ''}` : 'No matches';
+                        const matchClass = ticket.totalMatches > 0 ? 'win' : 'none';
+                        const pbIndicator = ticket.pbMatch ? ' (+PB)' : '';
+                        
+                        return `
+                            <div class="ticket-match-row">
+                                <div class="ticket-name">${ticket.name}</div>
+                                <div class="ticket-numbers">
+                                    ${ticket.numbers.map(n => {
+                                        const isMatch = lastDraw.numbers.includes(n);
+                                        return `<div class="mini-ball ${isMatch ? 'hot' : 'neutral'}" style="${isMatch ? '' : 'opacity: 0.4;'}">${n}</div>`;
+                                    }).join('')}
+                                    <div class="mini-ball ${ticket.pbMatch ? 'hot' : 'neutral'}" style="${ticket.pbMatch ? '' : 'opacity: 0.4;'}">${ticket.pb}</div>
+                                </div>
+                                <div class="ticket-match-count ${matchClass}">${matchText}${pbIndicator}</div>
+                            </div>
+                        `;
+                    }).join('');
+                    
+                    document.getElementById('ticket-matches-list').innerHTML = ticketsHTML;
                 }
             }
             

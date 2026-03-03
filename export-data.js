@@ -180,14 +180,50 @@ function exportData() {
     activeTickets[0].isBest = true;
   }
   
+  // Analyze last draw
+  const lastDraw = last6[0];
+  const top15Hot = new Set(rankedNumbers.slice(0, 15).map(n => n.num));
+  const bottom15Cold = new Set(rankedNumbers.slice(-15).map(n => n.num));
+  const hotPB = new Set(rankedPowerballs.slice(0, 5).map(n => n.num));
+  const coldPB = new Set(rankedPowerballs.slice(-5).map(n => n.num));
+  
+  const lastDrawAnalysis = {
+    hotNumbers: lastDraw.numbers.filter(n => top15Hot.has(n)),
+    coldNumbers: lastDraw.numbers.filter(n => bottom15Cold.has(n)),
+    neutralNumbers: lastDraw.numbers.filter(n => !top15Hot.has(n) && !bottom15Cold.has(n)),
+    isHotPB: hotPB.has(lastDraw.powerball),
+    isColdPB: coldPB.has(lastDraw.powerball),
+    hotCount: lastDraw.numbers.filter(n => top15Hot.has(n)).length,
+    coldCount: lastDraw.numbers.filter(n => bottom15Cold.has(n)).length,
+    neutralCount: lastDraw.numbers.filter(n => !top15Hot.has(n) && !bottom15Cold.has(n)).length
+  };
+  
+  // Check which user tickets matched
+  const lastDrawMatches = USER_TICKETS.map(ticket => {
+    const ticketSet = new Set(ticket.numbers);
+    const matches = lastDraw.numbers.filter(n => ticketSet.has(n));
+    const pbMatch = ticket.pb === lastDraw.powerball;
+    return {
+      name: ticket.name,
+      numbers: ticket.numbers,
+      pb: ticket.pb,
+      matches: matches,
+      matchCount: matches.length,
+      pbMatch: pbMatch,
+      totalMatches: matches.length + (pbMatch ? 1 : 0)
+    };
+  }).sort((a, b) => b.totalMatches - a.totalMatches);
+  
   // Build dashboard data structure
   const dashboardData = {
     metadata: {
       totalDraws: data.totalDraws,
       dateRange: data.dateRange,
       lastUpdated: new Date().toISOString(),
-      lastDraw: last6[0]
+      lastDraw: lastDraw
     },
+    lastDrawAnalysis: lastDrawAnalysis,
+    lastDrawMatches: lastDrawMatches,
     hotNumbers: rankedNumbers.slice(0, 15).map((item, index) => ({
       ...item,
       rank: index + 1,
