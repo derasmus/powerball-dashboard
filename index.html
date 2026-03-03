@@ -58,6 +58,72 @@
             font-size: 1.1rem;
         }
         
+        /* Countdown Timer Styles */
+        .countdown-container {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .countdown-label {
+            font-size: 1.1rem;
+            color: var(--gold);
+            margin-bottom: 15px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+        
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: var(--bg-dark);
+            padding: 15px 25px;
+            border-radius: 10px;
+            min-width: 80px;
+        }
+        
+        .countdown-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--accent);
+            font-family: 'Courier New', monospace;
+        }
+        
+        .countdown-unit {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 5px;
+        }
+        
+        .next-draw-info {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-top: 10px;
+        }
+        
+        @media (max-width: 600px) {
+            .countdown-item {
+                padding: 10px 15px;
+                min-width: 60px;
+            }
+            .countdown-value {
+                font-size: 1.8rem;
+            }
+        }
+        
         .loading {
             text-align: center;
             padding: 50px;
@@ -337,6 +403,29 @@
             <header>
                 <h1>🎱 SA Powerball Analytics</h1>
                 <p class="subtitle" id="subtitle">Loading...</p>
+                
+                <div class="countdown-container">
+                    <div class="countdown-label">⏰ Next Draw In:</div>
+                    <div class="countdown" id="countdown">
+                        <div class="countdown-item">
+                            <span class="countdown-value" id="countdown-days">--</span>
+                            <span class="countdown-unit">Days</span>
+                        </div>
+                        <div class="countdown-item">
+                            <span class="countdown-value" id="countdown-hours">--</span>
+                            <span class="countdown-unit">Hours</span>
+                        </div>
+                        <div class="countdown-item">
+                            <span class="countdown-value" id="countdown-minutes">--</span>
+                            <span class="countdown-unit">Minutes</span>
+                        </div>
+                        <div class="countdown-item">
+                            <span class="countdown-value" id="countdown-seconds">--</span>
+                            <span class="countdown-unit">Seconds</span>
+                        </div>
+                    </div>
+                    <div class="next-draw-info" id="next-draw-info">Next draw: Loading...</div>
+                </div>
             </header>
             
             <div class="stats-grid" id="stats-grid"></div>
@@ -601,6 +690,73 @@
         
         // Load data on page load
         loadDashboard();
+        
+        // Countdown Timer for Next Draw
+        // Powerball draws: Tue, Fri, Sun at 21:00 SAST (GMT+2)
+        function getNextDrawDate() {
+            const now = new Date();
+            const sastOffset = 2 * 60 * 60 * 1000; // GMT+2 in milliseconds
+            const nowSAST = new Date(now.getTime() + sastOffset);
+            
+            // Draw days: Tuesday (2), Friday (5), Sunday (0)
+            const drawDays = [0, 2, 5];
+            const drawHour = 21;
+            const drawMinute = 0;
+            
+            // Find next draw
+            let nextDraw = new Date(nowSAST);
+            nextDraw.setUTCHours(drawHour - 2, drawMinute, 0, 0); // Convert to UTC
+            
+            // Check if we've passed today's draw time
+            if (nextDraw <= nowSAST) {
+                nextDraw.setDate(nextDraw.getDate() + 1);
+            }
+            
+            // Find the next draw day
+            while (!drawDays.includes(nextDraw.getDay())) {
+                nextDraw.setDate(nextDraw.getDate() + 1);
+            }
+            
+            return nextDraw;
+        }
+        
+        function formatDrawDay(date) {
+            const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            const dayName = days[date.getDay()];
+            return `${dayName} at 21:00 SAST`;
+        }
+        
+        function updateCountdown() {
+            const now = new Date();
+            const nextDraw = getNextDrawDate();
+            const diff = nextDraw - now;
+            
+            if (diff <= 0) {
+                // Draw is happening now!
+                document.getElementById('countdown-label').textContent = '🎱 DRAW IN PROGRESS!';
+                document.getElementById('countdown-days').textContent = '00';
+                document.getElementById('countdown-hours').textContent = '00';
+                document.getElementById('countdown-minutes').textContent = '00';
+                document.getElementById('countdown-seconds').textContent = '00';
+                document.getElementById('next-draw-info').textContent = 'Check back soon for results!';
+                return;
+            }
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            document.getElementById('countdown-days').textContent = String(days).padStart(2, '0');
+            document.getElementById('countdown-hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('countdown-minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('countdown-seconds').textContent = String(seconds).padStart(2, '0');
+            document.getElementById('next-draw-info').textContent = `Next draw: ${formatDrawDay(nextDraw)}`;
+        }
+        
+        // Start countdown immediately and update every second
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
     </script>
 </body>
 </html>
