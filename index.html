@@ -364,6 +364,18 @@
             </div>
             
             <div class="card" style="margin-bottom: 30px;">
+                <h2>🎟️ YOUR ACTIVE TICKETS (13 Combinations)</h2>
+                <p style="color: var(--text-muted); margin-bottom: 20px;">
+                    Purchased: 2026-03-02 | Coverage: 100% of top 15 hot numbers
+                </p>
+                <div class="recommendations" id="active-tickets">
+                    <div style="text-align: center; padding: 30px; color: var(--text-muted);">
+                        Loading your tickets...
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" style="margin-bottom: 30px;">
                 <h2>🎯 RECOMMENDED COMBINATIONS</h2>
                 <div class="recommendations" id="recommendations"></div>
             </div>
@@ -535,6 +547,28 @@
                 </div>
             `;
             document.getElementById('recommendations').innerHTML = recsHTML;
+            
+            // Active Tickets Section
+            if (data.activeTickets) {
+                let ticketsHTML = '';
+                data.activeTickets.forEach(ticket => {
+                    const pbClass = ticket.pb === 2 ? 'hot' : ticket.pb === 14 ? 'cold' : 'average';
+                    ticketsHTML += `
+                        <div class="combo-card" style="border: ${ticket.isBest ? '2px solid var(--gold)' : '1px solid rgba(255,255,255,0.1)'};">
+                            <h3>Combo ${ticket.name} ${ticket.isBest ? '👑' : ''}</h3>
+                            <div class="combo-numbers">
+                                ${ticket.numbers.map(n => `<div class="combo-ball">${n}</div>`).join('')}
+                                <div class="combo-ball pb ${pbClass}">${ticket.pb}</div>
+                            </div>
+                            <div class="combo-strategy">${ticket.strategy}</div>
+                            <div style="margin-top: 10px; font-size: 0.85rem; color: var(--text-muted);">
+                                Historical: ${ticket.winRate}% win rate | Best: ${ticket.bestResult}
+                            </div>
+                        </div>
+                    `;
+                });
+                document.getElementById('active-tickets').innerHTML = ticketsHTML;
+            }
             
             // Insights
             const insightsHTML = `

@@ -12,6 +12,23 @@ const path = require('path');
 const DATA_FILE = path.join(__dirname, '..', 'lottery-data', 'powerball-results.json');
 const OUTPUT_FILE = path.join(__dirname, 'data.json');
 
+// User's 13 combinations with strategies
+const USER_TICKETS = [
+  { name: '1', numbers: [3, 15, 18, 24, 38], pb: 2, strategy: 'Hot & Overdue' },
+  { name: '2', numbers: [1, 7, 14, 26, 44], pb: 14, strategy: 'Super Overdue Cold' },
+  { name: '3', numbers: [15, 19, 24, 35, 46], pb: 2, strategy: 'Hot Pairs' },
+  { name: '4', numbers: [12, 19, 20, 32, 33], pb: 12, strategy: 'Consecutive Focus' },
+  { name: '5', numbers: [3, 13, 15, 19, 24], pb: 2, strategy: 'Hot Triplets' },
+  { name: '6', numbers: [1, 7, 27, 44, 46], pb: 14, strategy: 'Overdue Cold' },
+  { name: '7', numbers: [3, 13, 21, 24, 33], pb: 12, strategy: 'Recent Triplets' },
+  { name: 'A', numbers: [3, 11, 24, 38, 49], pb: 2, strategy: 'Sticky Streak' },
+  { name: 'B', numbers: [15, 18, 24, 38, 44], pb: 14, strategy: 'Overdue Heat' },
+  { name: 'C', numbers: [1, 7, 24, 32, 49], pb: 2, strategy: '46% Repeat Play' },
+  { name: 'D', numbers: [16, 22, 29, 41, 44], pb: 2, strategy: 'Missing Hot' },
+  { name: 'E', numbers: [7, 15, 16, 22, 29], pb: 14, strategy: 'Hot + Overdue Mix' },
+  { name: 'F', numbers: [3, 22, 29, 41, 49], pb: 2, strategy: 'Complete Coverage' }
+];
+
 function exportData() {
   console.log('📊 Exporting Powerball data for dashboard...');
   
@@ -105,6 +122,62 @@ function exportData() {
     drawNumber: draw.drawNumber
   }));
   
+  // Calculate historical performance for user's tickets
+  const activeTickets = USER_TICKETS.map(ticket => {
+    const ticketSet = new Set(ticket.numbers);
+    let wins = 0;
+    let totalPrize = 0;
+    let bestResult = { matchCount: 0, pbMatch: false };
+    let bestPrize = 0;
+    
+    sorted.forEach(draw => {
+      const matches = draw.numbers.filter(n => ticketSet.has(n));
+      const matchCount = matches.length;
+      const pbMatch = ticket.pb === draw.powerball;
+      
+      // Calculate prize
+      let prize = 0;
+      if (matchCount === 5 && pbMatch) prize = draw.jackpot || 65000000;
+      else if (matchCount === 5) prize = 127919;
+      else if (matchCount === 4 && pbMatch) prize = 9709;
+      else if (matchCount === 4) prize = 1084;
+      else if (matchCount === 3 && pbMatch) prize = 532;
+      else if (matchCount === 3) prize = 23;
+      else if (matchCount === 2 && pbMatch) prize = 24;
+      else if (matchCount === 1 && pbMatch) prize = 15;
+      else if (matchCount === 0 && pbMatch) prize = 10;
+      
+      if (prize > 0) {
+        wins++;
+        totalPrize += prize;
+        if (prize > bestPrize) {
+          bestPrize = prize;
+          bestResult = { matchCount, pbMatch };
+        }
+      }
+    });
+    
+    const winRate = ((wins / sorted.length) * 100).toFixed(2);
+    const resultText = bestResult.matchCount > 0 
+      ? `${bestResult.matchCount} match${bestResult.pbMatch ? ' + PB' : ''}` 
+      : 'No wins yet';
+    
+    return {
+      ...ticket,
+      wins,
+      totalPrize,
+      winRate: parseFloat(winRate),
+      bestResult: resultText,
+      bestPrize,
+      isBest: false // Will mark best performer below
+    };
+  }).sort((a, b) => b.winRate - a.winRate);
+  
+  // Mark the best performer
+  if (activeTickets.length > 0) {
+    activeTickets[0].isBest = true;
+  }
+  
   // Build dashboard data structure
   const dashboardData = {
     metadata: {
@@ -135,6 +208,7 @@ function exportData() {
     })),
     topPairs: sortedPairs,
     last20Draws: last20,
+    activeTickets: activeTickets,
     statistics: {
       expectedFreq: (data.totalDraws * 5 / 50).toFixed(1),
       expectedPB: (data.totalDraws / 20).toFixed(1),
@@ -158,6 +232,8 @@ function exportData() {
   console.log(`📊 Total draws: ${data.totalDraws}`);
   console.log(`🔥 Hottest: #${dashboardData.hotNumbers[0].num} (${dashboardData.hotNumbers[0].count}x)`);
   console.log(`❄️ Coldest: #${dashboardData.coldNumbers[0].num} (${dashboardData.coldNumbers[0].count}x)`);
+  console.log(`🎟️ Active tickets exported: ${activeTickets.length}`);
+  console.log(`👑 Best ticket: Combo ${activeTickets[0].name} (${activeTickets[0].winRate}% win rate)`);
   console.log(`📅 Date range: ${data.dateRange.earliest} to ${data.dateRange.latest}`);
 }
 
