@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SA Powerball Analytics Dashboard</title>
+    <style>
+        :root {
+            --bg-dark: #1a1a2e;
+            --bg-card: #16213e;
+            --accent: #e94560;
+            --accent-secondary: #0f3460;
+            --text: #eaeaea;
+            --text-muted: #a0a0a0;
+            --hot: #ff6b6b;
+            --cold: #4ecdc4;
+            --gold: #ffd93d;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, var(--bg-card), var(--accent-secondary));
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, var(--accent), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 50px;
+            font-size: 1.5rem;
+            color: var(--text-muted);
+        }
+        
+        .spinner {
+            border: 3px solid rgba(255,255,255,0.1);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: var(--bg-card);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            transition: transform 0.2s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 10px 0;
+            color: var(--gold);
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .card {
+            background: var(--bg-card);
+            padding: 25px;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .card h2 {
+            margin-bottom: 20px;
+            color: var(--accent);
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .number-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .number-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 15px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+        
+        .number-item:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        
+        .number-ball {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: white;
+        }
+        
+        .hot { background: linear-gradient(135deg, var(--hot), #ff8e8e); }
+        .average { background: linear-gradient(135deg, #4a90d9, #357abd); }
+        .cold { background: linear-gradient(135deg, var(--cold), #45b7aa); }
+        
+        .number-info {
+            flex: 1;
+            margin-left: 15px;
+        }
+        
+        .number-count {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+        
+        .bar-container {
+            width: 100px;
+            height: 8px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .bar {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+        
+        .bar.hot { background: var(--hot); }
+        .bar.average { background: #4a90d9; }
+        .bar.cold { background: var(--cold); }
+        
+        .gap-info {
+            font-size: 0.8rem;
+            color: var(--gold);
+            margin-top: 4px;
+        }
+        
+        .draw-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .draw-item {
+            background: rgba(255,255,255,0.05);
+            padding: 15px;
+            border-radius: 10px;
+        }
+        
+        .draw-date {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        
+        .draw-numbers {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .draw-ball {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1rem;
+            color: white;
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+        }
+        
+        .draw-ball.pb {
+            background: linear-gradient(135deg, #ffd93d, #ff9f43);
+            color: #333;
+        }
+        
+        .recommendations {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .combo-card {
+            background: linear-gradient(135deg, var(--bg-card), var(--accent-secondary));
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .combo-card h3 {
+            color: var(--gold);
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .combo-numbers {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+        
+        .combo-ball {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: white;
+            background: linear-gradient(135deg, #e94560, #ff6b6b);
+        }
+        
+        .combo-ball.pb {
+            background: linear-gradient(135deg, #ffd93d, #ff9f43);
+            color: #333;
+        }
+        
+        .combo-strategy {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-muted);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin-top: 40px;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        
+        .badge.hot { background: rgba(255, 107, 107, 0.2); color: var(--hot); }
+        .badge.cold { background: rgba(78, 205, 196, 0.2); color: var(--cold); }
+        .badge.just-hit { background: rgba(255, 217, 61, 0.2); color: var(--gold); }
+        
+        @media (max-width: 768px) {
+            h1 { font-size: 1.8rem; }
+            .grid { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="loading" class="loading">
+            <div class="spinner"></div>
+            <div>Loading Powerball data... 🎱</div>
+        </div>
+        
+        <div id="content" style="display: none;">
+            <header>
+                <h1>🎱 SA Powerball Analytics</h1>
+                <p class="subtitle" id="subtitle">Loading...</p>
+            </header>
+            
+            <div class="stats-grid" id="stats-grid"></div>
+            
+            <div class="grid" id="main-grid">
+                <div class="card">
+                    <h2>🔥 HOTTEST NUMBERS</h2>
+                    <div class="number-list" id="hot-numbers"></div>
+                </div>
+                
+                <div class="card">
+                    <h2>❄️ COLDEST NUMBERS</h2>
+                    <div class="number-list" id="cold-numbers"></div>
+                </div>
+            </div>
+            
+            <div class="card" style="margin-bottom: 30px;">
+                <h2>🔵 POWERBALL ANALYSIS</h2>
+                <div class="number-list" id="powerball-list"></div>
+            </div>
+            
+            <div class="card" style="margin-bottom: 30px;">
+                <h2>🔄 LAST 20 DRAWS</h2>
+                <div class="draw-list" id="last-draws"></div>
+            </div>
+            
+            <div class="card" style="margin-bottom: 30px;">
+                <h2>🎯 RECOMMENDED COMBINATIONS</h2>
+                <div class="recommendations" id="recommendations"></div>
+            </div>
+            
+            <div class="card">
+                <h2>📊 KEY INSIGHTS</h2>
+                <ul style="list-style: none; padding: 0;" id="insights"></ul>
+            </div>
+            
+            <div class="footer" id="footer">
+                <p>Loading...</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Fetch and render data
+        async function loadDashboard() {
+            try {
+                const response = await fetch('./data.json');
+                const data = await response.json();
+                renderDashboard(data);
+            } catch (error) {
+                console.error('Failed to load data:', error);
+                document.getElementById('loading').innerHTML = 
+                    '<div style="color: #ff6b6b;">❌ Failed to load data. Make sure data.json exists.</div>';
+            }
+        }
+        
+        function renderDashboard(data) {
+            // Hide loading, show content
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('content').style.display = 'block';
+            
+            // Update header
+            document.getElementById('subtitle').innerHTML = 
+                `${data.metadata.totalDraws} Draws Analyzed | ${data.metadata.dateRange.earliest} - ${data.metadata.dateRange.latest}`;
+            
+            // Stats grid
+            const statsHTML = `
+                <div class="stat-card">
+                    <div class="stat-label">Total Draws</div>
+                    <div class="stat-value">${data.metadata.totalDraws}</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Hot Number</div>
+                    <div class="stat-value">#${data.hotNumbers[0].num}</div>
+                    <div class="stat-label">${data.hotNumbers[0].count} appearances</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Cold Number</div>
+                    <div class="stat-value">#${data.coldNumbers[0].num}</div>
+                    <div class="stat-label">${data.coldNumbers[0].count} appearances</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Best PB</div>
+                    <div class="stat-value">#${data.powerballs[0].num}</div>
+                    <div class="stat-label">${data.powerballs[0].count} appearances</div>
+                </div>
+            `;
+            document.getElementById('stats-grid').innerHTML = statsHTML;
+            
+            // Hot numbers
+            const hotHTML = data.hotNumbers.slice(0, 5).map(num => {
+                const maxCount = data.hotNumbers[0].count;
+                const width = (num.count / maxCount * 100).toFixed(0);
+                const stickyBadge = num.isSticky ? '<span class="badge hot">STICKY</span>' : '';
+                const justHit = num.gap === 0 ? '<span class="badge just-hit">JUST HIT</span>' : '';
+                const gapInfo = num.gap > 0 ? `<div class="gap-info">${num.gap} draws since last seen</div>` : '';
+                
+                return `
+                    <div class="number-item">
+                        <div class="number-ball hot">${num.num}</div>
+                        <div class="number-info">
+                            <div>Rank #${num.rank} ${stickyBadge} ${justHit}</div>
+                            <div class="number-count">${num.count} hits (${num.percentage}%)</div>
+                            ${gapInfo}
+                        </div>
+                        <div class="bar-container">
+                            <div class="bar hot" style="width: ${width}%"></div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            document.getElementById('hot-numbers').innerHTML = hotHTML;
+            
+            // Cold numbers
+            const coldHTML = data.coldNumbers.slice(0, 5).map(num => {
+                const maxCount = data.coldNumbers[data.coldNumbers.length - 1].count;
+                const width = (num.count / maxCount * 100).toFixed(0);
+                const overdueBadge = num.isOverdue ? '<span class="badge cold">OVERDUE</span>' : '';
+                const gapInfo = num.gap > 0 ? `<div class="gap-info">${num.gap} draws since last seen</div>` : '';
+                
+                return `
+                    <div class="number-item">
+                        <div class="number-ball cold">${num.num}</div>
+                        <div class="number-info">
+                            <div>Rank #${num.rank} ${overdueBadge}</div>
+                            <div class="number-count">${num.count} hits (${num.percentage}%)</div>
+                            ${gapInfo}
+                        </div>
+                        <div class="bar-container">
+                            <div class="bar cold" style="width: ${width}%"></div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            document.getElementById('cold-numbers').innerHTML = coldHTML;
+            
+            // Powerballs
+            const pbHTML = data.powerballs.slice(0, 3).map((pb, i) => {
+                const maxCount = data.powerballs[0].count;
+                const width = (pb.count / maxCount * 100).toFixed(0);
+                const badge = i === 0 ? '<span class="badge hot">KING</span>' : '';
+                return `
+                    <div class="number-item">
+                        <div class="number-ball ${i === 0 ? 'hot' : i === 1 ? 'average' : 'cold'}" style="background: ${i === 0 ? 'linear-gradient(135deg, #ffd93d, #ff9f43)' : i === 1 ? 'linear-gradient(135deg, #a8a8a8, #888)' : 'linear-gradient(135deg, #4ecdc4, #45b7aa)'}; color: ${i === 0 ? '#333' : 'white'};">${pb.num}</div>
+                        <div class="number-info">
+                            <div>Rank #${pb.rank} ${badge}</div>
+                            <div class="number-count">${pb.count} hits (${pb.percentage}%)</div>
+                        </div>
+                        <div class="bar-container">
+                            <div class="bar" style="width: ${width}%; background: ${i === 0 ? '#ffd93d' : i === 1 ? '#a8a8a8' : '#4ecdc4'};"></div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            document.getElementById('powerball-list').innerHTML = pbHTML;
+            
+            // Last 20 draws
+            const drawsHTML = data.last20Draws.map(draw => {
+                return `
+                    <div class="draw-item">
+                        <div class="draw-date">${draw.date}</div>
+                        <div class="draw-numbers">
+                            ${draw.numbers.map(n => `<div class="draw-ball">${n}</div>`).join('')}
+                            <div class="draw-ball pb">${draw.powerball}</div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            document.getElementById('last-draws').innerHTML = drawsHTML;
+            
+            // Recommendations
+            const recsHTML = `
+                <div class="combo-card">
+                    <h3>🔥 Hot & Overdue</h3>
+                    <div class="combo-numbers">
+                        ${data.recommendations.hotCombo.map(n => `<div class="combo-ball">${n}</div>`).join('')}
+                        <div class="combo-ball pb">${data.recommendations.hotPB}</div>
+                    </div>
+                    <div class="combo-strategy">Mix of hottest numbers</div>
+                </div>
+                <div class="combo-card">
+                    <h3>❄️ Cold Play</h3>
+                    <div class="combo-numbers">
+                        ${data.recommendations.coldCombo.map(n => `<div class="combo-ball">${n}</div>`).join('')}
+                        <div class="combo-ball pb">${data.recommendations.coldPB}</div>
+                    </div>
+                    <div class="combo-strategy">Cold numbers overdue</div>
+                </div>
+                <div class="combo-card">
+                    <h3>🔄 Sticky Numbers</h3>
+                    <div class="combo-numbers">
+                        ${data.recommendations.stickyNumbers.slice(0, 5).map(n => `<div class="combo-ball">${n}</div>`).join('')}
+                        <div class="combo-ball pb">2</div>
+                    </div>
+                    <div class="combo-strategy">Most likely to repeat consecutively</div>
+                </div>
+            `;
+            document.getElementById('recommendations').innerHTML = recsHTML;
+            
+            // Insights
+            const insightsHTML = `
+                <li style="margin-bottom: 15px; padding-left: 30px; position: relative;">
+                    <span style="position: absolute; left: 0; font-size: 1.5rem;">🔥</span>
+                    <strong>Hot streak:</strong> #${data.hotNumbers[0].num} appears on average every ${(data.metadata.totalDraws / data.hotNumbers[0].count).toFixed(1)} draws
+                </li>
+                <li style="margin-bottom: 15px; padding-left: 30px; position: relative;">
+                    <span style="position: absolute; left: 0; font-size: 1.5rem;">🔄</span>
+                    <strong>Repeat pattern:</strong> ${data.statistics.drawsWithRepeat} draws (${data.statistics.consecutiveRate}) have at least one repeat from previous
+                </li>
+                <li style="margin-bottom: 15px; padding-left: 30px; position: relative;">
+                    <span style="position: absolute; left: 0; font-size: 1.5rem;">🔗</span>
+                    <strong>Best pair:</strong> #${data.topPairs[0].n1} & #${data.topPairs[0].n2} appear together ${data.topPairs[0].count} times
+                </li>
+                <li style="margin-bottom: 15px; padding-left: 30px; position: relative;">
+                    <span style="position: absolute; left: 0; font-size: 1.5rem;">🎱</span>
+                    <strong>Powerball king:</strong> #${data.powerballs[0].num} appears ${data.powerballs[0].percentage}% of the time
+                </li>
+            `;
+            document.getElementById('insights').innerHTML = insightsHTML;
+            
+            // Footer
+            const footerHTML = `
+                <p>Data last updated: ${new Date(data.metadata.lastUpdated).toLocaleString()} | ${data.metadata.totalDraws} draws analyzed</p>
+                <p style="margin-top: 10px; font-size: 0.9rem;">🎱 Good luck! Play responsibly. 🦄</p>
+            `;
+            document.getElementById('footer').innerHTML = footerHTML;
+        }
+        
+        // Load data on page load
+        loadDashboard();
+    </script>
+</body>
+</html>

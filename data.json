@@ -1,0 +1,782 @@
+{
+  "metadata": {
+    "totalDraws": 806,
+    "dateRange": {
+      "earliest": "2018-06-26",
+      "latest": "2026-02-27"
+    },
+    "lastUpdated": "2026-03-03T04:52:54.458Z",
+    "lastDraw": {
+      "date": "2026-02-27",
+      "numbers": [
+        11,
+        14,
+        24,
+        32,
+        43
+      ],
+      "powerball": 2,
+      "jackpot": 65146527,
+      "rollover": 10,
+      "totalPrizePool": 5530497,
+      "totalSales": 25005800,
+      "drawNumber": 1698
+    }
+  },
+  "hotNumbers": [
+    {
+      "num": 15,
+      "count": 99,
+      "rank": 1,
+      "percentage": "12.3",
+      "gap": 3,
+      "isSticky": true,
+      "stickyCount": 10
+    },
+    {
+      "num": 3,
+      "count": 96,
+      "rank": 2,
+      "percentage": "11.9",
+      "gap": 11,
+      "isSticky": true,
+      "stickyCount": 13
+    },
+    {
+      "num": 13,
+      "count": 96,
+      "rank": 3,
+      "percentage": "11.9",
+      "gap": 6,
+      "isSticky": true,
+      "stickyCount": 10
+    },
+    {
+      "num": 24,
+      "count": 96,
+      "rank": 4,
+      "percentage": "11.9",
+      "gap": 0,
+      "isSticky": true,
+      "stickyCount": 12
+    },
+    {
+      "num": 49,
+      "count": 96,
+      "rank": 5,
+      "percentage": "11.9",
+      "gap": 5,
+      "isSticky": true,
+      "stickyCount": 17
+    },
+    {
+      "num": 20,
+      "count": 94,
+      "rank": 6,
+      "percentage": "11.7",
+      "gap": 7,
+      "isSticky": true,
+      "stickyCount": 6
+    },
+    {
+      "num": 38,
+      "count": 92,
+      "rank": 7,
+      "percentage": "11.4",
+      "gap": 16,
+      "isSticky": true,
+      "stickyCount": 10
+    },
+    {
+      "num": 18,
+      "count": 91,
+      "rank": 8,
+      "percentage": "11.3",
+      "gap": 16,
+      "isSticky": true,
+      "stickyCount": 10
+    },
+    {
+      "num": 29,
+      "count": 91,
+      "rank": 9,
+      "percentage": "11.3",
+      "gap": 10,
+      "isSticky": true,
+      "stickyCount": 11
+    },
+    {
+      "num": 19,
+      "count": 87,
+      "rank": 10,
+      "percentage": "10.8",
+      "gap": 1,
+      "isSticky": true,
+      "stickyCount": 11
+    },
+    {
+      "num": 22,
+      "count": 87,
+      "rank": 11,
+      "percentage": "10.8",
+      "gap": 12,
+      "isSticky": true,
+      "stickyCount": 7
+    },
+    {
+      "num": 21,
+      "count": 86,
+      "rank": 12,
+      "percentage": "10.7",
+      "gap": 6,
+      "isSticky": true,
+      "stickyCount": 9
+    },
+    {
+      "num": 16,
+      "count": 85,
+      "rank": 13,
+      "percentage": "10.5",
+      "gap": 10,
+      "isSticky": true,
+      "stickyCount": 7
+    },
+    {
+      "num": 35,
+      "count": 85,
+      "rank": 14,
+      "percentage": "10.5",
+      "gap": 2,
+      "isSticky": false,
+      "stickyCount": 4
+    },
+    {
+      "num": 41,
+      "count": 85,
+      "rank": 15,
+      "percentage": "10.5",
+      "gap": 1,
+      "isSticky": true,
+      "stickyCount": 7
+    }
+  ],
+  "coldNumbers": [
+    {
+      "num": 1,
+      "count": 58,
+      "rank": 36,
+      "percentage": "7.2",
+      "gap": 28,
+      "isOverdue": true
+    },
+    {
+      "num": 26,
+      "count": 65,
+      "rank": 37,
+      "percentage": "8.1",
+      "gap": 4,
+      "isOverdue": false
+    },
+    {
+      "num": 14,
+      "count": 65,
+      "rank": 38,
+      "percentage": "8.1",
+      "gap": 806,
+      "isOverdue": false
+    },
+    {
+      "num": 37,
+      "count": 71,
+      "rank": 39,
+      "percentage": "8.8",
+      "gap": 4,
+      "isOverdue": false
+    },
+    {
+      "num": 25,
+      "count": 71,
+      "rank": 40,
+      "percentage": "8.8",
+      "gap": 2,
+      "isOverdue": false
+    },
+    {
+      "num": 23,
+      "count": 71,
+      "rank": 41,
+      "percentage": "8.8",
+      "gap": 1,
+      "isOverdue": false
+    },
+    {
+      "num": 7,
+      "count": 71,
+      "rank": 42,
+      "percentage": "8.8",
+      "gap": 32,
+      "isOverdue": true
+    },
+    {
+      "num": 2,
+      "count": 72,
+      "rank": 43,
+      "percentage": "8.9",
+      "gap": 7,
+      "isOverdue": false
+    },
+    {
+      "num": 30,
+      "count": 73,
+      "rank": 44,
+      "percentage": "9.1",
+      "gap": 15,
+      "isOverdue": false
+    },
+    {
+      "num": 17,
+      "count": 73,
+      "rank": 45,
+      "percentage": "9.1",
+      "gap": 2,
+      "isOverdue": false
+    },
+    {
+      "num": 45,
+      "count": 74,
+      "rank": 46,
+      "percentage": "9.2",
+      "gap": 17,
+      "isOverdue": true
+    },
+    {
+      "num": 44,
+      "count": 74,
+      "rank": 47,
+      "percentage": "9.2",
+      "gap": 36,
+      "isOverdue": true
+    },
+    {
+      "num": 34,
+      "count": 74,
+      "rank": 48,
+      "percentage": "9.2",
+      "gap": 1,
+      "isOverdue": false
+    },
+    {
+      "num": 33,
+      "count": 74,
+      "rank": 49,
+      "percentage": "9.2",
+      "gap": 1,
+      "isOverdue": false
+    },
+    {
+      "num": 27,
+      "count": 74,
+      "rank": 50,
+      "percentage": "9.2",
+      "gap": 24,
+      "isOverdue": true
+    }
+  ],
+  "powerballs": [
+    {
+      "num": 2,
+      "count": 54,
+      "rank": 1,
+      "percentage": "6.7"
+    },
+    {
+      "num": 12,
+      "count": 48,
+      "rank": 2,
+      "percentage": "6.0"
+    },
+    {
+      "num": 15,
+      "count": 46,
+      "rank": 3,
+      "percentage": "5.7"
+    },
+    {
+      "num": 16,
+      "count": 46,
+      "rank": 4,
+      "percentage": "5.7"
+    },
+    {
+      "num": 18,
+      "count": 46,
+      "rank": 5,
+      "percentage": "5.7"
+    },
+    {
+      "num": 5,
+      "count": 44,
+      "rank": 6,
+      "percentage": "5.5"
+    },
+    {
+      "num": 4,
+      "count": 42,
+      "rank": 7,
+      "percentage": "5.2"
+    },
+    {
+      "num": 19,
+      "count": 42,
+      "rank": 8,
+      "percentage": "5.2"
+    },
+    {
+      "num": 11,
+      "count": 41,
+      "rank": 9,
+      "percentage": "5.1"
+    },
+    {
+      "num": 7,
+      "count": 40,
+      "rank": 10,
+      "percentage": "5.0"
+    },
+    {
+      "num": 8,
+      "count": 39,
+      "rank": 11,
+      "percentage": "4.8"
+    },
+    {
+      "num": 17,
+      "count": 39,
+      "rank": 12,
+      "percentage": "4.8"
+    },
+    {
+      "num": 6,
+      "count": 37,
+      "rank": 13,
+      "percentage": "4.6"
+    },
+    {
+      "num": 10,
+      "count": 37,
+      "rank": 14,
+      "percentage": "4.6"
+    },
+    {
+      "num": 1,
+      "count": 36,
+      "rank": 15,
+      "percentage": "4.5"
+    },
+    {
+      "num": 9,
+      "count": 36,
+      "rank": 16,
+      "percentage": "4.5"
+    },
+    {
+      "num": 13,
+      "count": 36,
+      "rank": 17,
+      "percentage": "4.5"
+    },
+    {
+      "num": 3,
+      "count": 34,
+      "rank": 18,
+      "percentage": "4.2"
+    },
+    {
+      "num": 14,
+      "count": 33,
+      "rank": 19,
+      "percentage": "4.1"
+    },
+    {
+      "num": 20,
+      "count": 30,
+      "rank": 20,
+      "percentage": "3.7"
+    }
+  ],
+  "topPairs": [
+    {
+      "n1": 19,
+      "n2": 24,
+      "count": 19
+    },
+    {
+      "n1": 15,
+      "n2": 24,
+      "count": 18
+    },
+    {
+      "n1": 35,
+      "n2": 46,
+      "count": 15
+    },
+    {
+      "n1": 21,
+      "n2": 33,
+      "count": 14
+    },
+    {
+      "n1": 3,
+      "n2": 40,
+      "count": 14
+    },
+    {
+      "n1": 3,
+      "n2": 13,
+      "count": 14
+    },
+    {
+      "n1": 24,
+      "n2": 38,
+      "count": 14
+    },
+    {
+      "n1": 19,
+      "n2": 49,
+      "count": 14
+    },
+    {
+      "n1": 18,
+      "n2": 46,
+      "count": 14
+    },
+    {
+      "n1": 29,
+      "n2": 38,
+      "count": 13
+    },
+    {
+      "n1": 24,
+      "n2": 41,
+      "count": 13
+    },
+    {
+      "n1": 15,
+      "n2": 30,
+      "count": 13
+    },
+    {
+      "n1": 19,
+      "n2": 20,
+      "count": 13
+    },
+    {
+      "n1": 29,
+      "n2": 49,
+      "count": 13
+    },
+    {
+      "n1": 13,
+      "n2": 20,
+      "count": 13
+    },
+    {
+      "n1": 13,
+      "n2": 28,
+      "count": 13
+    },
+    {
+      "n1": 46,
+      "n2": 48,
+      "count": 13
+    },
+    {
+      "n1": 18,
+      "n2": 48,
+      "count": 13
+    },
+    {
+      "n1": 32,
+      "n2": 40,
+      "count": 13
+    },
+    {
+      "n1": 13,
+      "n2": 47,
+      "count": 13
+    }
+  ],
+  "last20Draws": [
+    {
+      "date": "2026-02-27",
+      "numbers": [
+        11,
+        14,
+        24,
+        32,
+        43
+      ],
+      "powerball": 2,
+      "jackpot": 65146527,
+      "rollover": 10,
+      "totalPrizePool": 5530497,
+      "totalSales": 25005800,
+      "drawNumber": 1698
+    },
+    {
+      "date": "2026-02-24",
+      "numbers": [
+        19,
+        23,
+        33,
+        34,
+        41
+      ],
+      "powerball": 9
+    },
+    {
+      "date": "2026-02-20",
+      "numbers": [
+        17,
+        19,
+        25,
+        28,
+        35
+      ],
+      "powerball": 17
+    },
+    {
+      "date": "2026-02-17",
+      "numbers": [
+        5,
+        15,
+        23,
+        24,
+        42
+      ],
+      "powerball": 5
+    },
+    {
+      "date": "2026-02-13",
+      "numbers": [
+        4,
+        10,
+        23,
+        26,
+        37
+      ],
+      "powerball": 20
+    },
+    {
+      "date": "2026-02-10",
+      "numbers": [
+        17,
+        23,
+        25,
+        39,
+        49
+      ],
+      "powerball": 11
+    },
+    {
+      "date": "2026-02-06",
+      "numbers": [
+        6,
+        13,
+        21,
+        28,
+        31
+      ],
+      "powerball": 5
+    },
+    {
+      "date": "2026-02-03",
+      "numbers": [
+        2,
+        11,
+        20,
+        40,
+        49
+      ],
+      "powerball": 2
+    },
+    {
+      "date": "2026-01-30",
+      "numbers": [
+        19,
+        26,
+        31,
+        33,
+        39
+      ],
+      "powerball": 2
+    },
+    {
+      "date": "2026-01-27",
+      "numbers": [
+        11,
+        13,
+        28,
+        43,
+        48
+      ],
+      "powerball": 3
+    },
+    {
+      "date": "2026-01-23",
+      "numbers": [
+        4,
+        16,
+        24,
+        29,
+        31
+      ],
+      "powerball": 15
+    },
+    {
+      "date": "2026-01-20",
+      "numbers": [
+        2,
+        3,
+        16,
+        17,
+        35
+      ],
+      "powerball": 5
+    },
+    {
+      "date": "2026-01-16",
+      "numbers": [
+        8,
+        22,
+        36,
+        39,
+        47
+      ],
+      "powerball": 20
+    },
+    {
+      "date": "2026-01-13",
+      "numbers": [
+        21,
+        32,
+        33,
+        39,
+        50
+      ],
+      "powerball": 3
+    },
+    {
+      "date": "2026-01-09",
+      "numbers": [
+        11,
+        20,
+        35,
+        42,
+        50
+      ],
+      "powerball": 7
+    },
+    {
+      "date": "2026-01-06",
+      "numbers": [
+        9,
+        12,
+        13,
+        30,
+        34
+      ],
+      "powerball": 2
+    },
+    {
+      "date": "2026-01-02",
+      "numbers": [
+        17,
+        18,
+        35,
+        38,
+        39
+      ],
+      "powerball": 9
+    },
+    {
+      "date": "2025-12-30",
+      "numbers": [
+        6,
+        13,
+        14,
+        42,
+        45
+      ],
+      "powerball": 11
+    },
+    {
+      "date": "2025-12-26",
+      "numbers": [
+        18,
+        20,
+        35,
+        46,
+        48
+      ],
+      "powerball": 2
+    },
+    {
+      "date": "2025-12-23",
+      "numbers": [
+        3,
+        12,
+        29,
+        46,
+        49
+      ],
+      "powerball": 3
+    }
+  ],
+  "statistics": {
+    "expectedFreq": "80.6",
+    "expectedPB": "40.3",
+    "consecutiveRate": "9.25%",
+    "drawsWithRepeat": 371
+  },
+  "recommendations": {
+    "hotCombo": [
+      3,
+      15,
+      18,
+      24,
+      38
+    ],
+    "hotPB": 2,
+    "coldCombo": [
+      1,
+      7,
+      14,
+      26,
+      44
+    ],
+    "coldPB": 14,
+    "stickyNumbers": [
+      15,
+      3,
+      13,
+      24,
+      49
+    ],
+    "overdueHot": [
+      3,
+      38,
+      18,
+      22,
+      46,
+      9,
+      50,
+      36,
+      8,
+      12,
+      27,
+      45,
+      30
+    ]
+  }
+}
