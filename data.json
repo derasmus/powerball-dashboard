@@ -5,7 +5,7 @@
       "earliest": "2018-06-26",
       "latest": "2026-03-03"
     },
-    "lastUpdated": "2026-03-04T06:16:15.199Z",
+    "lastUpdated": "2026-03-04T07:08:48.789Z",
     "lastDraw": {
       "date": "2026-03-03",
       "numbers": [
@@ -44,7 +44,7 @@
   },
   "lastDrawMatches": [
     {
-      "name": "1",
+      "name": "A",
       "numbers": [
         3,
         15,
@@ -61,41 +61,7 @@
       "totalMatches": 1
     },
     {
-      "name": "B",
-      "numbers": [
-        15,
-        18,
-        24,
-        38,
-        44
-      ],
-      "pb": 14,
-      "matches": [
-        38
-      ],
-      "matchCount": 1,
-      "pbMatch": false,
-      "totalMatches": 1
-    },
-    {
-      "name": "E",
-      "numbers": [
-        7,
-        15,
-        16,
-        22,
-        29
-      ],
-      "pb": 14,
-      "matches": [
-        29
-      ],
-      "matchCount": 1,
-      "pbMatch": false,
-      "totalMatches": 1
-    },
-    {
-      "name": "F",
+      "name": "D",
       "numbers": [
         3,
         22,
@@ -112,7 +78,7 @@
       "totalMatches": 1
     },
     {
-      "name": "A",
+      "name": "E",
       "numbers": [
         3,
         11,
@@ -129,7 +95,41 @@
       "totalMatches": 1
     },
     {
-      "name": "6",
+      "name": "H",
+      "numbers": [
+        15,
+        18,
+        24,
+        38,
+        44
+      ],
+      "pb": 14,
+      "matches": [
+        38
+      ],
+      "matchCount": 1,
+      "pbMatch": false,
+      "totalMatches": 1
+    },
+    {
+      "name": "I",
+      "numbers": [
+        7,
+        15,
+        16,
+        22,
+        29
+      ],
+      "pb": 14,
+      "matches": [
+        29
+      ],
+      "matchCount": 1,
+      "pbMatch": false,
+      "totalMatches": 1
+    },
+    {
+      "name": "J",
       "numbers": [
         1,
         7,
@@ -146,7 +146,7 @@
       "totalMatches": 1
     },
     {
-      "name": "5",
+      "name": "B",
       "numbers": [
         3,
         13,
@@ -161,22 +161,7 @@
       "totalMatches": 0
     },
     {
-      "name": "7",
-      "numbers": [
-        3,
-        13,
-        21,
-        24,
-        33
-      ],
-      "pb": 12,
-      "matches": [],
-      "matchCount": 0,
-      "pbMatch": false,
-      "totalMatches": 0
-    },
-    {
-      "name": "3",
+      "name": "C",
       "numbers": [
         15,
         19,
@@ -191,7 +176,22 @@
       "totalMatches": 0
     },
     {
-      "name": "4",
+      "name": "F",
+      "numbers": [
+        3,
+        13,
+        21,
+        24,
+        33
+      ],
+      "pb": 12,
+      "matches": [],
+      "matchCount": 0,
+      "pbMatch": false,
+      "totalMatches": 0
+    },
+    {
+      "name": "G",
       "numbers": [
         12,
         19,
@@ -781,7 +781,7 @@
   ],
   "activeTickets": [
     {
-      "name": "1",
+      "name": "A",
       "numbers": [
         3,
         15,
@@ -790,7 +790,7 @@
         38
       ],
       "pb": 2,
-      "strategy": "Hot & Overdue",
+      "strategy": "Combo 1: Hot & Overdue",
       "wins": 67,
       "totalPrize": 1009,
       "winRate": 8.3,
@@ -799,7 +799,7 @@
       "isBest": true
     },
     {
-      "name": "5",
+      "name": "B",
       "numbers": [
         3,
         13,
@@ -808,7 +808,7 @@
         24
       ],
       "pb": 2,
-      "strategy": "Hot Triplets",
+      "strategy": "Combo 5: Hot Triplets",
       "wins": 66,
       "totalPrize": 2545,
       "winRate": 8.18,
@@ -817,7 +817,7 @@
       "isBest": false
     },
     {
-      "name": "3",
+      "name": "C",
       "numbers": [
         15,
         19,
@@ -826,7 +826,7 @@
         46
       ],
       "pb": 2,
-      "strategy": "Hot Pairs",
+      "strategy": "Combo 3: Hot Pairs",
       "wins": 61,
       "totalPrize": 2454,
       "winRate": 7.56,
@@ -835,7 +835,7 @@
       "isBest": false
     },
     {
-      "name": "F",
+      "name": "D",
       "numbers": [
         3,
         22,
@@ -844,7 +844,7 @@
         49
       ],
       "pb": 2,
-      "strategy": "Complete Coverage",
+      "strategy": "Combo F: Complete Coverage",
       "wins": 60,
       "totalPrize": 825,
       "winRate": 7.43,
@@ -853,7 +853,7 @@
       "isBest": false
     },
     {
-      "name": "A",
+      "name": "E",
       "numbers": [
         3,
         11,
@@ -862,7 +862,7 @@
         49
       ],
       "pb": 2,
-      "strategy": "Sticky Streak",
+      "strategy": "Combo A: Sticky Streak",
       "wins": 58,
       "totalPrize": 1329,
       "winRate": 7.19,
@@ -871,7 +871,7 @@
       "isBest": false
     },
     {
-      "name": "7",
+      "name": "F",
       "numbers": [
         3,
         13,
@@ -880,7 +880,7 @@
         33
       ],
       "pb": 12,
-      "strategy": "Recent Triplets",
+      "strategy": "Combo 7: Recent Triplets",
       "wins": 56,
       "totalPrize": 1346,
       "winRate": 6.94,
@@ -889,7 +889,7 @@
       "isBest": false
     },
     {
-      "name": "4",
+      "name": "G",
       "numbers": [
         12,
         19,
@@ -898,7 +898,7 @@
         33
       ],
       "pb": 12,
-      "strategy": "Consecutive Focus",
+      "strategy": "Combo 4: Consecutive Focus",
       "wins": 53,
       "totalPrize": 1253,
       "winRate": 6.57,
@@ -907,7 +907,7 @@
       "isBest": false
     },
     {
-      "name": "B",
+      "name": "H",
       "numbers": [
         15,
         18,
@@ -916,7 +916,7 @@
         44
       ],
       "pb": 14,
-      "strategy": "Overdue Heat",
+      "strategy": "Combo B: Overdue Heat",
       "wins": 43,
       "totalPrize": 1709,
       "winRate": 5.33,
@@ -925,7 +925,7 @@
       "isBest": false
     },
     {
-      "name": "E",
+      "name": "I",
       "numbers": [
         7,
         15,
@@ -934,7 +934,7 @@
         29
       ],
       "pb": 14,
-      "strategy": "Hot + Overdue Mix",
+      "strategy": "Combo E: Hot + Overdue Mix",
       "wins": 40,
       "totalPrize": 583,
       "winRate": 4.96,
@@ -943,7 +943,7 @@
       "isBest": false
     },
     {
-      "name": "6",
+      "name": "J",
       "numbers": [
         1,
         7,
@@ -952,7 +952,7 @@
         46
       ],
       "pb": 14,
-      "strategy": "Overdue Cold",
+      "strategy": "Combo 6: Overdue Cold",
       "wins": 36,
       "totalPrize": 467,
       "winRate": 4.46,
