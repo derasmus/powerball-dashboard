@@ -14,16 +14,16 @@ const OUTPUT_FILE = path.join(__dirname, 'data.json');
 
 // User's TOP 10 purchased boards (mapped to board letters A-J)
 const USER_TICKETS = [
-  { name: 'A', numbers: [3, 15, 18, 24, 38], pb: 2, strategy: 'Combo 1: Hot & Overdue' },
-  { name: 'B', numbers: [3, 13, 15, 19, 24], pb: 2, strategy: 'Combo 5: Hot Triplets' },
-  { name: 'C', numbers: [15, 19, 24, 35, 46], pb: 2, strategy: 'Combo 3: Hot Pairs' },
-  { name: 'D', numbers: [3, 22, 29, 41, 49], pb: 2, strategy: 'Combo F: Complete Coverage' },
-  { name: 'E', numbers: [3, 11, 24, 38, 49], pb: 2, strategy: 'Combo A: Sticky Streak' },
-  { name: 'F', numbers: [3, 13, 21, 24, 33], pb: 12, strategy: 'Combo 7: Recent Triplets' },
-  { name: 'G', numbers: [12, 19, 20, 32, 33], pb: 12, strategy: 'Combo 4: Consecutive Focus' },
-  { name: 'H', numbers: [15, 18, 24, 38, 44], pb: 14, strategy: 'Combo B: Overdue Heat' },
-  { name: 'I', numbers: [7, 15, 16, 22, 29], pb: 14, strategy: 'Combo E: Hot + Overdue Mix' },
-  { name: 'J', numbers: [1, 7, 27, 44, 46], pb: 14, strategy: 'Combo 6: Overdue Cold' }
+  { name: 'A', numbers: [3, 15, 18, 24, 38], pb: 2, strategy: 'Hot & Overdue' },
+  { name: 'B', numbers: [3, 13, 15, 19, 24], pb: 2, strategy: 'Hot Triplets' },
+  { name: 'C', numbers: [15, 19, 24, 35, 46], pb: 2, strategy: 'Hot Pairs' },
+  { name: 'D', numbers: [3, 22, 29, 41, 49], pb: 2, strategy: 'Complete Coverage' },
+  { name: 'E', numbers: [3, 11, 24, 38, 49], pb: 2, strategy: 'Sticky Streak' },
+  { name: 'F', numbers: [3, 13, 21, 24, 33], pb: 12, strategy: 'Recent Triplets' },
+  { name: 'G', numbers: [12, 19, 20, 32, 33], pb: 12, strategy: 'Consecutive Focus' },
+  { name: 'H', numbers: [15, 18, 24, 38, 44], pb: 14, strategy: 'Overdue Heat' },
+  { name: 'I', numbers: [7, 15, 16, 22, 29], pb: 14, strategy: 'Hot + Overdue Mix' },
+  { name: 'J', numbers: [1, 7, 27, 44, 46], pb: 14, strategy: 'Overdue Cold' }
 ];
 
 function exportData() {

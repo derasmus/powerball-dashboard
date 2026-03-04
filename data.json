@@ -5,7 +5,7 @@
       "earliest": "2018-06-26",
       "latest": "2026-03-03"
     },
-    "lastUpdated": "2026-03-04T07:08:48.789Z",
+    "lastUpdated": "2026-03-04T07:11:48.599Z",
     "lastDraw": {
       "date": "2026-03-03",
       "numbers": [
@@ -790,7 +790,7 @@
         38
       ],
       "pb": 2,
-      "strategy": "Combo 1: Hot & Overdue",
+      "strategy": "Hot & Overdue",
       "wins": 67,
       "totalPrize": 1009,
       "winRate": 8.3,
@@ -808,7 +808,7 @@
         24
       ],
       "pb": 2,
-      "strategy": "Combo 5: Hot Triplets",
+      "strategy": "Hot Triplets",
       "wins": 66,
       "totalPrize": 2545,
       "winRate": 8.18,
@@ -826,7 +826,7 @@
         46
       ],
       "pb": 2,
-      "strategy": "Combo 3: Hot Pairs",
+      "strategy": "Hot Pairs",
       "wins": 61,
       "totalPrize": 2454,
       "winRate": 7.56,
@@ -844,7 +844,7 @@
         49
       ],
       "pb": 2,
-      "strategy": "Combo F: Complete Coverage",
+      "strategy": "Complete Coverage",
       "wins": 60,
       "totalPrize": 825,
       "winRate": 7.43,
@@ -862,7 +862,7 @@
         49
       ],
       "pb": 2,
-      "strategy": "Combo A: Sticky Streak",
+      "strategy": "Sticky Streak",
       "wins": 58,
       "totalPrize": 1329,
       "winRate": 7.19,
@@ -880,7 +880,7 @@
         33
       ],
       "pb": 12,
-      "strategy": "Combo 7: Recent Triplets",
+      "strategy": "Recent Triplets",
       "wins": 56,
       "totalPrize": 1346,
       "winRate": 6.94,
@@ -898,7 +898,7 @@
         33
       ],
       "pb": 12,
-      "strategy": "Combo 4: Consecutive Focus",
+      "strategy": "Consecutive Focus",
       "wins": 53,
       "totalPrize": 1253,
       "winRate": 6.57,
@@ -916,7 +916,7 @@
         44
       ],
       "pb": 14,
-      "strategy": "Combo B: Overdue Heat",
+      "strategy": "Overdue Heat",
       "wins": 43,
       "totalPrize": 1709,
       "winRate": 5.33,
@@ -934,7 +934,7 @@
         29
       ],
       "pb": 14,
-      "strategy": "Combo E: Hot + Overdue Mix",
+      "strategy": "Hot + Overdue Mix",
       "wins": 40,
       "totalPrize": 583,
       "winRate": 4.96,
@@ -952,7 +952,7 @@
         46
       ],
       "pb": 14,
-      "strategy": "Combo 6: Overdue Cold",
+      "strategy": "Overdue Cold",
       "wins": 36,
       "totalPrize": 467,
       "winRate": 4.46,
