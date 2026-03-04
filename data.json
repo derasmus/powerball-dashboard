@@ -5,7 +5,7 @@
       "earliest": "2018-06-26",
       "latest": "2026-03-03"
     },
-    "lastUpdated": "2026-03-04T03:44:16.893Z",
+    "lastUpdated": "2026-03-04T06:16:15.199Z",
     "lastDraw": {
       "date": "2026-03-03",
       "numbers": [
@@ -61,57 +61,6 @@
       "totalMatches": 1
     },
     {
-      "name": "2",
-      "numbers": [
-        1,
-        7,
-        14,
-        26,
-        44
-      ],
-      "pb": 14,
-      "matches": [
-        1
-      ],
-      "matchCount": 1,
-      "pbMatch": false,
-      "totalMatches": 1
-    },
-    {
-      "name": "6",
-      "numbers": [
-        1,
-        7,
-        27,
-        44,
-        46
-      ],
-      "pb": 14,
-      "matches": [
-        1
-      ],
-      "matchCount": 1,
-      "pbMatch": false,
-      "totalMatches": 1
-    },
-    {
-      "name": "A",
-      "numbers": [
-        3,
-        11,
-        24,
-        38,
-        49
-      ],
-      "pb": 2,
-      "matches": [
-        38
-      ],
-      "matchCount": 1,
-      "pbMatch": false,
-      "totalMatches": 1
-    },
-    {
       "name": "B",
       "numbers": [
         15,
@@ -123,40 +72,6 @@
       "pb": 14,
       "matches": [
         38
-      ],
-      "matchCount": 1,
-      "pbMatch": false,
-      "totalMatches": 1
-    },
-    {
-      "name": "C",
-      "numbers": [
-        1,
-        7,
-        24,
-        32,
-        49
-      ],
-      "pb": 2,
-      "matches": [
-        1
-      ],
-      "matchCount": 1,
-      "pbMatch": false,
-      "totalMatches": 1
-    },
-    {
-      "name": "D",
-      "numbers": [
-        16,
-        22,
-        29,
-        41,
-        44
-      ],
-      "pb": 2,
-      "matches": [
-        29
       ],
       "matchCount": 1,
       "pbMatch": false,
@@ -197,34 +112,38 @@
       "totalMatches": 1
     },
     {
-      "name": "3",
+      "name": "A",
       "numbers": [
-        15,
-        19,
+        3,
+        11,
         24,
-        35,
-        46
+        38,
+        49
       ],
       "pb": 2,
-      "matches": [],
-      "matchCount": 0,
+      "matches": [
+        38
+      ],
+      "matchCount": 1,
       "pbMatch": false,
-      "totalMatches": 0
+      "totalMatches": 1
     },
     {
-      "name": "4",
+      "name": "6",
       "numbers": [
-        12,
-        19,
-        20,
-        32,
-        33
+        1,
+        7,
+        27,
+        44,
+        46
       ],
-      "pb": 12,
-      "matches": [],
-      "matchCount": 0,
+      "pb": 14,
+      "matches": [
+        1
+      ],
+      "matchCount": 1,
       "pbMatch": false,
-      "totalMatches": 0
+      "totalMatches": 1
     },
     {
       "name": "5",
@@ -248,6 +167,36 @@
         13,
         21,
         24,
+        33
+      ],
+      "pb": 12,
+      "matches": [],
+      "matchCount": 0,
+      "pbMatch": false,
+      "totalMatches": 0
+    },
+    {
+      "name": "3",
+      "numbers": [
+        15,
+        19,
+        24,
+        35,
+        46
+      ],
+      "pb": 2,
+      "matches": [],
+      "matchCount": 0,
+      "pbMatch": false,
+      "totalMatches": 0
+    },
+    {
+      "name": "4",
+      "numbers": [
+        12,
+        19,
+        20,
+        32,
         33
       ],
       "pb": 12,
@@ -940,42 +889,6 @@
       "isBest": false
     },
     {
-      "name": "C",
-      "numbers": [
-        1,
-        7,
-        24,
-        32,
-        49
-      ],
-      "pb": 2,
-      "strategy": "46% Repeat Play",
-      "wins": 56,
-      "totalPrize": 778,
-      "winRate": 6.94,
-      "bestResult": "2 match + PB",
-      "bestPrize": 24,
-      "isBest": false
-    },
-    {
-      "name": "D",
-      "numbers": [
-        16,
-        22,
-        29,
-        41,
-        44
-      ],
-      "pb": 2,
-      "strategy": "Missing Hot",
-      "wins": 56,
-      "totalPrize": 755,
-      "winRate": 6.94,
-      "bestResult": "2 match + PB",
-      "bestPrize": 24,
-      "isBest": false
-    },
-    {
       "name": "4",
       "numbers": [
         12,
@@ -1045,24 +958,6 @@
       "winRate": 4.46,
       "bestResult": "2 match + PB",
       "bestPrize": 24,
-      "isBest": false
-    },
-    {
-      "name": "2",
-      "numbers": [
-        1,
-        7,
-        14,
-        26,
-        44
-      ],
-      "pb": 14,
-      "strategy": "Super Overdue Cold",
-      "wins": 35,
-      "totalPrize": 426,
-      "winRate": 4.34,
-      "bestResult": "3 match",
-      "bestPrize": 23,
       "isBest": false
     }
   ],

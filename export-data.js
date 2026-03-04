@@ -12,21 +12,18 @@ const path = require('path');
 const DATA_FILE = path.join(__dirname, '..', 'lottery-data', 'powerball-results.json');
 const OUTPUT_FILE = path.join(__dirname, 'data.json');
 
-// User's 13 combinations with strategies
+// User's TOP 10 combinations with strategies (optimized from 13)
 const USER_TICKETS = [
   { name: '1', numbers: [3, 15, 18, 24, 38], pb: 2, strategy: 'Hot & Overdue' },
-  { name: '2', numbers: [1, 7, 14, 26, 44], pb: 14, strategy: 'Super Overdue Cold' },
-  { name: '3', numbers: [15, 19, 24, 35, 46], pb: 2, strategy: 'Hot Pairs' },
-  { name: '4', numbers: [12, 19, 20, 32, 33], pb: 12, strategy: 'Consecutive Focus' },
   { name: '5', numbers: [3, 13, 15, 19, 24], pb: 2, strategy: 'Hot Triplets' },
-  { name: '6', numbers: [1, 7, 27, 44, 46], pb: 14, strategy: 'Overdue Cold' },
-  { name: '7', numbers: [3, 13, 21, 24, 33], pb: 12, strategy: 'Recent Triplets' },
-  { name: 'A', numbers: [3, 11, 24, 38, 49], pb: 2, strategy: 'Sticky Streak' },
   { name: 'B', numbers: [15, 18, 24, 38, 44], pb: 14, strategy: 'Overdue Heat' },
-  { name: 'C', numbers: [1, 7, 24, 32, 49], pb: 2, strategy: '46% Repeat Play' },
-  { name: 'D', numbers: [16, 22, 29, 41, 44], pb: 2, strategy: 'Missing Hot' },
+  { name: '7', numbers: [3, 13, 21, 24, 33], pb: 12, strategy: 'Recent Triplets' },
+  { name: '3', numbers: [15, 19, 24, 35, 46], pb: 2, strategy: 'Hot Pairs' },
   { name: 'E', numbers: [7, 15, 16, 22, 29], pb: 14, strategy: 'Hot + Overdue Mix' },
-  { name: 'F', numbers: [3, 22, 29, 41, 49], pb: 2, strategy: 'Complete Coverage' }
+  { name: '4', numbers: [12, 19, 20, 32, 33], pb: 12, strategy: 'Consecutive Focus' },
+  { name: 'F', numbers: [3, 22, 29, 41, 49], pb: 2, strategy: 'Complete Coverage' },
+  { name: 'A', numbers: [3, 11, 24, 38, 49], pb: 2, strategy: 'Sticky Streak' },
+  { name: '6', numbers: [1, 7, 27, 44, 46], pb: 14, strategy: 'Overdue Cold' }
 ];
 
 function exportData() {
