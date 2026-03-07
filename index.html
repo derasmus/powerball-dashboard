@@ -1163,14 +1163,14 @@
         loadDashboard();
         
         // Countdown Timer for Next Draw
-        // Powerball draws: Tue, Fri, Sun at 21:00 SAST (GMT+2)
+        // Powerball draws: Tue & Fri at 21:00 SAST (GMT+2) - NO SUNDAY
         function getNextDrawDate() {
             const now = new Date();
             const sastOffset = 2 * 60 * 60 * 1000; // GMT+2 in milliseconds
             const nowSAST = new Date(now.getTime() + sastOffset);
             
-            // Draw days: Tuesday (2), Friday (5), Sunday (0)
-            const drawDays = [0, 2, 5];
+            // Draw days: Tuesday (2), Friday (5) - NOT Sunday!
+            const drawDays = [2, 5];
             const drawHour = 21;
             const drawMinute = 0;
             
