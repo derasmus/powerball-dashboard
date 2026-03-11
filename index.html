@@ -869,6 +869,9 @@
         }
         
         function renderDashboard(data) {
+            // Store data globally for countdown
+            dashboardData = data;
+            
             // Hide loading, show content
             document.getElementById('loading').style.display = 'none';
             document.getElementById('content').style.display = 'block';
@@ -1162,9 +1165,19 @@
         // Load data on page load
         loadDashboard();
         
+        // Store dashboard data globally for countdown
+        let dashboardData = null;
+        
         // Countdown Timer for Next Draw
         // Powerball draws: Tue & Fri at 21:00 SAST (GMT+2) - NO SUNDAY
         function getNextDrawDate() {
+            // Use nextDraw from data.json if available
+            if (dashboardData && dashboardData.metadata && dashboardData.metadata.nextDraw) {
+                const next = dashboardData.metadata.nextDraw;
+                return new Date(next.date + 'T' + next.time.replace(' SAST', '') + '+02:00');
+            }
+            
+            // Fallback: calculate locally
             const now = new Date();
             const sastOffset = 2 * 60 * 60 * 1000; // GMT+2 in milliseconds
             const nowSAST = new Date(now.getTime() + sastOffset);

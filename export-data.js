@@ -211,13 +211,39 @@ function exportData() {
     };
   }).sort((a, b) => b.totalMatches - a.totalMatches);
   
+  // Calculate next draw date (Tue & Fri only)
+  const lastDrawDate = new Date(lastDraw.date);
+  const dayOfWeek = lastDrawDate.getDay();
+  const nextDrawDate = new Date(lastDrawDate);
+  
+  if (dayOfWeek === 2) { // Tuesday -> Friday
+    nextDrawDate.setDate(nextDrawDate.getDate() + 3);
+  } else if (dayOfWeek === 5) { // Friday -> Tuesday
+    nextDrawDate.setDate(nextDrawDate.getDate() + 4);
+  } else {
+    // Find next Tuesday or Friday
+    const daysUntilTue = (2 - dayOfWeek + 7) % 7 || 7;
+    const daysUntilFri = (5 - dayOfWeek + 7) % 7 || 7;
+    const daysUntil = Math.min(daysUntilTue, daysUntilFri);
+    nextDrawDate.setDate(nextDrawDate.getDate() + daysUntil);
+  }
+  nextDrawDate.setHours(21, 0, 0, 0);
+  
+  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  const nextDraw = {
+    date: nextDrawDate.toISOString().split('T')[0],
+    dayOfWeek: days[nextDrawDate.getDay()],
+    time: '21:00 SAST'
+  };
+
   // Build dashboard data structure
   const dashboardData = {
     metadata: {
       totalDraws: data.totalDraws,
       dateRange: data.dateRange,
       lastUpdated: new Date().toISOString(),
-      lastDraw: lastDraw
+      lastDraw: lastDraw,
+      nextDraw: nextDraw
     },
     lastDrawAnalysis: lastDrawAnalysis,
     lastDrawMatches: lastDrawMatches,

@@ -5,7 +5,7 @@
       "earliest": "2018-06-26",
       "latest": "2026-03-10"
     },
-    "lastUpdated": "2026-03-11T07:11:41.312Z",
+    "lastUpdated": "2026-03-11T07:17:11.176Z",
     "lastDraw": {
       "date": "2026-03-10",
       "numbers": [
@@ -23,6 +23,11 @@
       "drawNumber": 1701,
       "hasWinner": false,
       "isRollover": true
+    },
+    "nextDraw": {
+      "date": "2026-03-13",
+      "dayOfWeek": "Friday",
+      "time": "21:00 SAST"
     }
   },
   "lastDrawAnalysis": {
