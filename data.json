@@ -5,7 +5,7 @@
       "earliest": "2018-06-26",
       "latest": "2026-03-10"
     },
-    "lastUpdated": "2026-03-11T07:17:11.176Z",
+    "lastUpdated": "2026-03-11T07:20:08.991Z",
     "lastDraw": {
       "date": "2026-03-10",
       "numbers": [
@@ -64,6 +64,42 @@
       ],
       "matchCount": 1,
       "pbMatch": true,
+      "totalMatches": 2
+    },
+    {
+      "name": "K",
+      "numbers": [
+        1,
+        5,
+        7,
+        11,
+        24
+      ],
+      "pb": 19,
+      "matches": [
+        1,
+        5
+      ],
+      "matchCount": 2,
+      "pbMatch": false,
+      "totalMatches": 2
+    },
+    {
+      "name": "N",
+      "numbers": [
+        1,
+        4,
+        5,
+        7,
+        11
+      ],
+      "pb": 1,
+      "matches": [
+        1,
+        5
+      ],
+      "matchCount": 2,
+      "pbMatch": false,
       "totalMatches": 2
     },
     {
@@ -145,6 +181,57 @@
       "matches": [],
       "matchCount": 0,
       "pbMatch": true,
+      "totalMatches": 1
+    },
+    {
+      "name": "L",
+      "numbers": [
+        1,
+        4,
+        11,
+        19,
+        24
+      ],
+      "pb": 19,
+      "matches": [
+        1
+      ],
+      "matchCount": 1,
+      "pbMatch": false,
+      "totalMatches": 1
+    },
+    {
+      "name": "M",
+      "numbers": [
+        1,
+        4,
+        19,
+        24,
+        39
+      ],
+      "pb": 11,
+      "matches": [
+        1
+      ],
+      "matchCount": 1,
+      "pbMatch": false,
+      "totalMatches": 1
+    },
+    {
+      "name": "O",
+      "numbers": [
+        1,
+        8,
+        11,
+        18,
+        19
+      ],
+      "pb": 1,
+      "matches": [
+        1
+      ],
+      "matchCount": 1,
+      "pbMatch": false,
       "totalMatches": 1
     },
     {
@@ -919,6 +1006,60 @@
       "isBest": false
     },
     {
+      "name": "M",
+      "numbers": [
+        1,
+        4,
+        19,
+        24,
+        39
+      ],
+      "pb": 11,
+      "strategy": "Hot Powerball",
+      "wins": 48,
+      "totalPrize": 1712,
+      "winRate": 5.93,
+      "bestResult": "4 match",
+      "bestPrize": 1084,
+      "isBest": false
+    },
+    {
+      "name": "K",
+      "numbers": [
+        1,
+        5,
+        7,
+        11,
+        24
+      ],
+      "pb": 19,
+      "strategy": "Under 12 Powerball",
+      "wins": 47,
+      "totalPrize": 1155,
+      "winRate": 5.81,
+      "bestResult": "3 match + PB",
+      "bestPrize": 532,
+      "isBest": false
+    },
+    {
+      "name": "L",
+      "numbers": [
+        1,
+        4,
+        11,
+        19,
+        24
+      ],
+      "pb": 19,
+      "strategy": "Mid-Range Focus",
+      "wins": 46,
+      "totalPrize": 20047,
+      "winRate": 5.69,
+      "bestResult": "4 match + PB",
+      "bestPrize": 9709,
+      "isBest": false
+    },
+    {
       "name": "H",
       "numbers": [
         15,
@@ -950,6 +1091,42 @@
       "wins": 41,
       "totalPrize": 593,
       "winRate": 5.07,
+      "bestResult": "2 match + PB",
+      "bestPrize": 24,
+      "isBest": false
+    },
+    {
+      "name": "N",
+      "numbers": [
+        1,
+        4,
+        5,
+        7,
+        11
+      ],
+      "pb": 1,
+      "strategy": "Cold Powerball",
+      "wins": 40,
+      "totalPrize": 1610,
+      "winRate": 4.94,
+      "bestResult": "4 match",
+      "bestPrize": 1084,
+      "isBest": false
+    },
+    {
+      "name": "O",
+      "numbers": [
+        1,
+        8,
+        11,
+        18,
+        19
+      ],
+      "pb": 1,
+      "strategy": "Cold Starter",
+      "wins": 38,
+      "totalPrize": 475,
+      "winRate": 4.7,
       "bestResult": "2 match + PB",
       "bestPrize": 24,
       "isBest": false
