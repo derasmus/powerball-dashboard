@@ -5,7 +5,7 @@
       "earliest": "2018-06-26",
       "latest": "2026-03-17"
     },
-    "lastUpdated": "2026-03-18T08:24:32.044Z",
+    "lastUpdated": "2026-03-18T08:43:10.075Z",
     "lastDraw": {
       "date": "2026-03-17",
       "numbers": [
@@ -16,9 +16,13 @@
         48
       ],
       "powerball": 5,
+      "jackpot": 107000000,
+      "rollover": 15,
+      "totalPrizePool": 5849825,
+      "totalSales": 26083915,
       "drawNumber": 1703,
       "hasWinner": false,
-      "isRollover": false
+      "isRollover": true
     },
     "nextDraw": {
       "date": "2026-03-20",
@@ -768,9 +772,13 @@
         48
       ],
       "powerball": 5,
+      "jackpot": 107000000,
+      "rollover": 15,
+      "totalPrizePool": 5849825,
+      "totalSales": 26083915,
       "drawNumber": 1703,
       "hasWinner": false,
-      "isRollover": false
+      "isRollover": true
     },
     {
       "date": "2026-03-13",
@@ -800,7 +808,7 @@
         25
       ],
       "powerball": 14,
-      "jackpot": 93000000,
+      "jackpot": 85000000,
       "rollover": 13,
       "totalPrizePool": null,
       "totalSales": null,
@@ -836,7 +844,7 @@
         43
       ],
       "powerball": 15,
-      "jackpot": 75000000,
+      "jackpot": 72661443,
       "rollover": 11,
       "totalPrizePool": 5454143,
       "totalSales": 24540390,
